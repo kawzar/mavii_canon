@@ -2,9 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "SFMLRenderer.h"
+#include "SFMLObject.h"
 #include <list>
 
 using namespace sf;
+using namespace std;
 class Game
 {
 private:
@@ -24,7 +26,9 @@ private:
 
 	//cuerpo de box2d 
 	b2Body* controlBody;
-	
+	std::list<SFMLObject*> objects;
+	std::list<SFMLObject*>::iterator it;
+
 		
 
 public:

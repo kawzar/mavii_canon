@@ -127,9 +127,15 @@ void Game::InitPhysics(){
 
 
 	//*****
+	
+	Target* target = new Target(phyWorld, wnd, "box.jpg", 0.05f, 10, 10);
+	objects.push_back(target);
 
-	Target* target = new Target(phyWorld, wnd, "box.jpg", 0.1f, 10, 10);
+	Target* target2 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 20, 10);
+	objects.push_back(target2);
 
+	Target* target3 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 30, 10);
+	objects.push_back(target3);
 
 
 	int fps = 60;
@@ -142,16 +148,23 @@ void Game::InitPhysics(){
 		phyWorld->Step(frameTime, 8, 8);
 
 		//ahora les decimos a los objetos
-
-		target->updatePosition();
+		for (it = objects.begin(); it != objects.end(); ++it)
+		{
+			(*it)->updatePosition();
+		}
 		//ground->updatePosition();
 
 		wnd->clear();
 
 		phyWorld->DrawDebugData();
 		//p1->draw();
-		target->draw();
+		for (it = objects.begin(); it != objects.end(); ++it)
+		{
+			(*it)->draw();
+		}
+
 		wnd->display();
+
 
 		phyWorld->ClearForces();
 	}
