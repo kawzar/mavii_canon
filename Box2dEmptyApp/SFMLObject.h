@@ -17,7 +17,7 @@ protected:
 	//...
 public:
 	SFMLObject(b2World* _world, RenderWindow *_wnd, std::string path, float scale, float posX, float posY);
-	void updatePosition();
+	virtual void updatePosition();
 	void draw();
 };
 

@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Box2DHelper.h"
 #include "Target.h"
+#include "Arrow.h"
 
 Game::Game(int ancho, int alto,std::string titulo)
 {
@@ -145,6 +146,9 @@ void Game::InitPhysics(){
 
 	Target* target6 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 118, 85);
 	objects.push_back(target6);
+
+	Arrow* arrow = new Arrow(phyWorld, wnd, "arrow.png", 0.03f, 30, 80);
+	objects.push_back(arrow);
 
 
 	int fps = 60;
