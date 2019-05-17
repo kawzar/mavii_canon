@@ -8,12 +8,15 @@ SFMLObject::SFMLObject(b2World* _world, RenderWindow *_wnd, std::string path, fl
 	_image->loadFromFile(path);
 	_sprite = new Sprite(*_image);
 	_sprite->setOrigin(_sprite->getLocalBounds().width / 2.f, _sprite->getLocalBounds().height / 2.f);
-	_sprite->setScale(scale, scale);
+	_sprite->scale(scale, scale);
 }
 
 void SFMLObject::updatePosition() {
 	b2Vec2 pos = _body->GetPosition();
 	_sprite->setPosition(pos.x, pos.y);
+
+	float32 r = (_body->GetAngle()*(180 / b2_pi));
+	_sprite->setRotation(r);
 }
 
 void SFMLObject::draw() {

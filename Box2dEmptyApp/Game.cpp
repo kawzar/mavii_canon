@@ -52,12 +52,12 @@ void Game::DoEvents(){
 			case Event::Closed:
 				wnd->close();
 				break;
-			case Event::MouseButtonPressed:
-				b2Body *body=Box2DHelper::CreateTriangularDynamicBody(phyWorld,b2Vec2(0.0f,0.0f),10.0f,1.0f,4.0f,0.1f);
-				//transformamos las coordenadas segun la vista activa
-				Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
-				body->SetTransform(b2Vec2(pos.x,pos.y),0.0f);
-				break;
+			//case Event::MouseButtonPressed:
+			//	b2Body *body=Box2DHelper::CreateTriangularDynamicBody(phyWorld,b2Vec2(0.0f,0.0f),10.0f,1.0f,4.0f,0.1f);
+			//	//transformamos las coordenadas segun la vista activa
+			//	Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
+			//	body->SetTransform(b2Vec2(pos.x,pos.y),0.0f);
+			//	break;
 		}
 
 		
@@ -119,23 +119,32 @@ void Game::InitPhysics(){
 
 	b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,10,100);
 	rightWallBody->SetTransform(b2Vec2(100.0f,50.0f),0.0f);
-	
-	//Creamos un círculo que controlaremos con el teclado
-	controlBody= Box2DHelper::CreateCircularDynamicBody(phyWorld,5,1.0f,0.5,0.1f);
-	controlBody->SetTransform(b2Vec2(50.0f,50.0f),0.0f);
+	//
+	////Creamos un círculo que controlaremos con el teclado
+	//controlBody= Box2DHelper::CreateCircularDynamicBody(phyWorld,5,1.0f,0.5,0.1f);
+	//controlBody->SetTransform(b2Vec2(50.0f,50.0f),0.0f);
 		
 
 
 	//*****
 	
-	Target* target = new Target(phyWorld, wnd, "box.jpg", 0.05f, 10, 10);
+	Target* target = new Target(phyWorld, wnd, "box.jpg", 0.05f, 5, 5);
 	objects.push_back(target);
 
-	Target* target2 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 20, 10);
+	Target* target2 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 8, 5);
 	objects.push_back(target2);
 
-	Target* target3 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 30, 10);
+	Target* target3 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 11, 5);
 	objects.push_back(target3);
+
+	Target* target4 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 10, 0);
+	objects.push_back(target4);
+
+	Target* target5 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 13, 0);
+	objects.push_back(target5);
+
+	Target* target6 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 10, -10);
+	objects.push_back(target6);
 
 
 	int fps = 60;
