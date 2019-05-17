@@ -91,8 +91,8 @@ void Game::SetZoom(){
 
 	View camara;
 	//posicion del view
-	camara.setSize(100.0f, 100.0f);
-	camara.setCenter(50.0f, 50.0f);
+	camara.setSize(160, 100);
+	camara.setCenter(80.0f, 50.0f);
 	wnd->setView(camara); //asignamos la camara
 	
 
@@ -111,14 +111,14 @@ void Game::InitPhysics(){
 
 
 	//creamos un piso y paredes
-	b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,100,10);
-	groundBody->SetTransform(b2Vec2(50.0f,100.0f),0.0f);
-
+	b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,160,10);
+	groundBody->SetTransform(b2Vec2(80.0f,100.0f),0.0f);
+/*
 	b2Body* leftWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,10,100);
 	leftWallBody->SetTransform(b2Vec2(0.0f,50.0f),0.0f);
 
 	b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,10,100);
-	rightWallBody->SetTransform(b2Vec2(100.0f,50.0f),0.0f);
+	rightWallBody->SetTransform(b2Vec2(100.0f,50.0f),0.0f);*/
 	//
 	////Creamos un círculo que controlaremos con el teclado
 	//controlBody= Box2DHelper::CreateCircularDynamicBody(phyWorld,5,1.0f,0.5,0.1f);
@@ -128,22 +128,22 @@ void Game::InitPhysics(){
 
 	//*****
 	
-	Target* target = new Target(phyWorld, wnd, "box.jpg", 0.05f, 5, 5);
+	Target* target = new Target(phyWorld, wnd, "box.jpg", 0.05f, 115, 100);
 	objects.push_back(target);
 
-	Target* target2 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 8, 5);
+	Target* target2 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 118, 100);
 	objects.push_back(target2);
 
-	Target* target3 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 11, 5);
+	Target* target3 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 121, 100);
 	objects.push_back(target3);
 
-	Target* target4 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 10, 0);
+	Target* target4 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 117, 90);
 	objects.push_back(target4);
 
-	Target* target5 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 13, 0);
+	Target* target5 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 120, 90);
 	objects.push_back(target5);
 
-	Target* target6 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 10, -10);
+	Target* target6 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 118, 85);
 	objects.push_back(target6);
 
 
