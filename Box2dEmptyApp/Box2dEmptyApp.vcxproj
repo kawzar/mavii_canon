@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="Box2DHelper.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="SFMLObject.h" />
@@ -91,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Box2dEmptyApp.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="SFMLObject.cpp" />
@@ -104,6 +106,7 @@
   <ItemGroup>
     <Image Include="arrow.png" />
     <Image Include="box.jpg" />
+    <Image Include="canonball.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

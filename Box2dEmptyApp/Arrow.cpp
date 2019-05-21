@@ -5,6 +5,9 @@
 Arrow::Arrow(b2World* _world, RenderWindow *_wnd, std::string path, float scale, float posX, float posY): SFMLObject(_world, _wnd, path, scale, posX, posY)
 {
 	_sprite->setPosition(posX, posY);
+	_sprite->setOrigin(_sprite->getLocalBounds().height, _sprite->getOrigin().y);
+	_body = Box2DHelper::CreateTriangularStaticBody(_world, b2Vec2(posX, posY), 1);
+	_body->SetTransform(b2Vec2(posX, posY), 0.0f);
 }
 
 
@@ -23,6 +26,7 @@ void Arrow::updatePosition() {
 
 	float dx = curPos.x - position.x;
 	float dy = curPos.y - position.y;
+	
 
 	float rotation = ((atan2(dy, dx)) * 180 / PI);
 

@@ -3,6 +3,7 @@
 #include "Box2DHelper.h"
 #include "Target.h"
 #include "Arrow.h"
+#include "Ball.h"
 
 Game::Game(int ancho, int alto,std::string titulo)
 {
@@ -32,18 +33,29 @@ void Game::Loop(){
 
 }
 
-void Game::UpdatePhysics(){
-	
-	phyWorld->Step(frameTime,8,8);
+void Game::UpdatePhysics() {
+
+	phyWorld->Step(frameTime, 8, 8);
 	phyWorld->ClearForces();
-	phyWorld->DrawDebugData();
+	phyWorld->Step(frameTime, 8, 8);
+
+	for (it = objects.begin(); it != objects.end(); ++it)
+	{
+		(*it)->updatePosition();
+	}
 }
 
 void Game::DrawGame(){
+	wnd->clear();
 
-
-
+	//phyWorld->DrawDebugData();
+	//p1->draw();
+	for (it = objects.begin(); it != objects.end(); ++it)
+	{
+		(*it)->draw();
+	}
 }
+
 void Game::DoEvents(){
 
 	Event evt;
@@ -53,31 +65,13 @@ void Game::DoEvents(){
 			case Event::Closed:
 				wnd->close();
 				break;
-			//case Event::MouseButtonPressed:
-			//	b2Body *body=Box2DHelper::CreateTriangularDynamicBody(phyWorld,b2Vec2(0.0f,0.0f),10.0f,1.0f,4.0f,0.1f);
-			//	//transformamos las coordenadas segun la vista activa
-			//	Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
-			//	body->SetTransform(b2Vec2(pos.x,pos.y),0.0f);
-			//	break;
+			case Event::MouseButtonPressed:
+				shoot(evt);
+				break;
 		}
 
 		
 	}
-
-	//movemos el cuerpo
-	controlBody->SetAwake(true);
-	if(Keyboard::isKeyPressed(Keyboard::Left)) 
-		controlBody->SetLinearVelocity(b2Vec2 (-50.0f, 0.0f));
-	if(Keyboard::isKeyPressed(Keyboard::Right))
-		controlBody->SetLinearVelocity(b2Vec2 (50.0f, 0.0f));
-	if(Keyboard::isKeyPressed(Keyboard::Down))
-		controlBody->SetLinearVelocity(b2Vec2 (0.0f, 50.0f));
-	if (Keyboard::isKeyPressed(Keyboard::Up))
-		controlBody->SetLinearVelocity(b2Vec2 (0.0f, -50.0f));
-		
-
-
-
 }
 
 void Game::CheckCollitions(){
@@ -98,6 +92,14 @@ void Game::SetZoom(){
 	
 
 }
+void Game::shoot(sf::Event evt)
+{
+	Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
+	Ball* b = new Ball(phyWorld, wnd, "canonball.png", 0.01, pos.x, pos.y);
+	objects.push_back(b);
+}
+
+
 void Game::InitPhysics(){
 
 	//inicializamos el mundo con la gravedad por defecto
@@ -106,9 +108,9 @@ void Game::InitPhysics(){
 	//MyContactListener* l= new MyContactListener();
 	//phyWorld->SetContactListener(l);
 	//Creamos el renderer de debug y le seteamos las banderas para que dibuje TODO
-	debugRender= new SFMLRenderer(wnd);
+	/*debugRender= new SFMLRenderer(wnd);
 	debugRender->SetFlags(UINT_MAX);
-	phyWorld->SetDebugDraw(debugRender);
+	phyWorld->SetDebugDraw(debugRender);*/
 
 
 	//creamos un piso y paredes
@@ -147,41 +149,16 @@ void Game::InitPhysics(){
 	Target* target6 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 118, 85);
 	objects.push_back(target6);
 
-	Arrow* arrow = new Arrow(phyWorld, wnd, "arrow.png", 0.03f, 30, 80);
+	Arrow* arrow = new Arrow(phyWorld, wnd, "arrow.png", 0.03f, 50, 40);
 	objects.push_back(arrow);
+
+	Ball* ball = new Ball(phyWorld, wnd, "canonball.png", 0.01f, 60, 40);
+	objects.push_back(ball);
 
 
 	int fps = 60;
 	wnd->setFramerateLimit(fps);
 	float frameTime = 1.0f / fps;
-
-	//loop principal
-	while (wnd->isOpen()) {
-
-		phyWorld->Step(frameTime, 8, 8);
-
-		//ahora les decimos a los objetos
-		for (it = objects.begin(); it != objects.end(); ++it)
-		{
-			(*it)->updatePosition();
-		}
-		//ground->updatePosition();
-
-		wnd->clear();
-
-		phyWorld->DrawDebugData();
-		//p1->draw();
-		for (it = objects.begin(); it != objects.end(); ++it)
-		{
-			(*it)->draw();
-		}
-
-		wnd->display();
-
-
-		phyWorld->ClearForces();
-	}
-
 }
 
 

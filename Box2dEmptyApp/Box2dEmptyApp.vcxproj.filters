@@ -39,6 +39,9 @@
     <ClInclude Include="Arrow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -62,12 +65,18 @@
     <ClCompile Include="Arrow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="box.jpg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="canonball.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

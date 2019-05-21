@@ -47,8 +47,7 @@ public:
 	void UpdatePhysics();
 	void DoEvents();
 	void SetZoom();
-	
-
+	void shoot(sf::Event evt);
 	
 };
 
