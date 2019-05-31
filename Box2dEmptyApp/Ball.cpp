@@ -15,3 +15,8 @@ Ball::Ball(b2World* _world, RenderWindow *_wnd, std::string path, float scale, f
 Ball::~Ball()
 {
 }
+
+void Ball::applyImpulse(b2Vec2 impulse) {
+	b2Vec2 newImpulse = b2Vec2((impulse.x - _body->GetPosition().x) * 50, (impulse.y - _body->GetPosition().y) * 50);
+	_body->ApplyLinearImpulse(newImpulse, _body->GetPosition(), true);
+}

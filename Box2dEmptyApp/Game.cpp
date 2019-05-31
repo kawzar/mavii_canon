@@ -47,7 +47,7 @@ void Game::UpdatePhysics() {
 }
 
 void Game::DrawGame(){
-	//phyWorld->DrawDebugData();
+	phyWorld->DrawDebugData();
 	//p1->draw();
 	for (it = objects.begin(); it != objects.end(); ++it)
 	{
@@ -94,8 +94,10 @@ void Game::SetZoom(){
 void Game::shoot(sf::Event evt)
 {
 	Vector2f pos = wnd->mapPixelToCoords(Vector2i(evt.mouseButton.x, evt.mouseButton.y));
-	Ball* b = new Ball(phyWorld, wnd, "canonball.png", 0.01, pos.x, pos.y);
+	Ball* b = new Ball(phyWorld, wnd, "canonball.png", 0.01, 30, 80);
 	objects.push_back(b);
+
+	b->applyImpulse(b2Vec2(pos.x, pos.y));
 }
 
 
@@ -104,28 +106,17 @@ void Game::InitPhysics(){
 	//inicializamos el mundo con la gravedad por defecto
 	phyWorld= new b2World(b2Vec2(0.0f,9.8f));
 	
-	//MyContactListener* l= new MyContactListener();
-	//phyWorld->SetContactListener(l);
+	/*MyContactListener* l= new MyContactListener();
+	phyWorld->SetContactListener(l);*/
 	//Creamos el renderer de debug y le seteamos las banderas para que dibuje TODO
-	/*debugRender= new SFMLRenderer(wnd);
+	debugRender= new SFMLRenderer(wnd);
 	debugRender->SetFlags(UINT_MAX);
-	phyWorld->SetDebugDraw(debugRender);*/
+	phyWorld->SetDebugDraw(debugRender);
 
 
 	//creamos un piso y paredes
 	b2Body* groundBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,160,10);
-	groundBody->SetTransform(b2Vec2(80.0f,100.0f),0.0f);
-/*
-	b2Body* leftWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,10,100);
-	leftWallBody->SetTransform(b2Vec2(0.0f,50.0f),0.0f);
-
-	b2Body* rightWallBody = Box2DHelper::CreateRectangularStaticBody(phyWorld,10,100);
-	rightWallBody->SetTransform(b2Vec2(100.0f,50.0f),0.0f);*/
-	//
-	////Creamos un círculo que controlaremos con el teclado
-	//controlBody= Box2DHelper::CreateCircularDynamicBody(phyWorld,5,1.0f,0.5,0.1f);
-	//controlBody->SetTransform(b2Vec2(50.0f,50.0f),0.0f);
-		
+	groundBody->SetTransform(b2Vec2(80.0f,100.0f),0.0f);		
 
 
 	//*****
@@ -148,11 +139,6 @@ void Game::InitPhysics(){
 	Target* target6 = new Target(phyWorld, wnd, "box.jpg", 0.05f, 118, 85);
 	objects.push_back(target6);
 
-	Arrow* arrow = new Arrow(phyWorld, wnd, "arrow.png", 0.03f, 50, 40);
-	objects.push_back(arrow);
-
-	Ball* ball = new Ball(phyWorld, wnd, "canonball.png", 0.01f, 60, 40);
-	objects.push_back(ball);
 
 
 	int fps = 60;
