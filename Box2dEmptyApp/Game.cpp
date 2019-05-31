@@ -12,6 +12,7 @@ Game::Game(int ancho, int alto,std::string titulo)
 	fps=60;
 	wnd->setFramerateLimit(fps);
 	frameTime=1.0f/fps;
+	clearColor = Color::White;
 	SetZoom();
 	InitPhysics();
 }
@@ -46,8 +47,6 @@ void Game::UpdatePhysics() {
 }
 
 void Game::DrawGame(){
-	wnd->clear();
-
 	//phyWorld->DrawDebugData();
 	//p1->draw();
 	for (it = objects.begin(); it != objects.end(); ++it)

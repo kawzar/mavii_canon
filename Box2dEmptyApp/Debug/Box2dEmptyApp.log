@@ -1,3 +1,3 @@
 ﻿  Game.cpp
-c:\users\hmaca\documents\mavii\guias\unidad 2\canon\box2dfirstapp2017\box2demptyapp\game.cpp(98): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\hmaca\documents\mavii\guias\unidad 2\canon\box2dfirstapp2017\box2demptyapp\game.cpp(97): warning C4305: 'argument': truncation from 'double' to 'float'
   Box2dEmptyApp.vcxproj -> C:\Users\hmaca\Documents\MAVII\Guias\Unidad 2\Canon\Box2dFirstApp2017\Debug\Box2dEmptyApp.exe
